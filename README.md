@@ -105,7 +105,7 @@ git commit -m "feat: initial release of CampusFind university lost & found platf
 
 # Link your GitHub repository
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/campusfind.git
+git remote add origin https://github.com/UserXSaif/campusfind.git
 
 # Push code to GitHub
 git push -u origin main
