@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View full details of this lost or found item report on CampusFind.">
+    <title>Item Details — CampusFind</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation">
+        <div class="container navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <div class="logo-icon">🔍</div>
+                <div class="logo-text">Campus<span>Find</span></div>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lost-items.html">Lost Items</a></li>
+                <li><a href="found-items.html">Found Items</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <div id="nav-guest-btns"><a href="login.html" class="btn btn-ghost btn-sm">Login</a><a
+                        href="register.html" class="btn btn-primary btn-sm">Register</a></div>
+                <div id="nav-user-info" class="nav-user-info hidden"><a href="dashboard.html" class="nav-avatar">U</a><a
+                        href="dashboard.html" class="user-name"
+                        style="font-weight:600;color:var(--text);">User</a><button class="btn btn-ghost btn-sm"
+                        data-action="logout">Logout</button></div>
+            </div>
+            <button class="hamburger" id="hamburger"
+                aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div class="mobile-nav" id="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="lost-items.html">🔴 Lost Items</a></li>
+            <li><a href="found-items.html">🟢 Found Items</a></li>
+            <li><a href="about.html">ℹ️ About</a></li>
+            <li><a href="contact.html">📞 Contact</a></li>
+            <li><a href="dashboard.html">📊 Dashboard</a></li>
+        </ul>
+        <div class="mobile-nav-actions" id="mobile-guest-btns"><a href="login.html" class="btn btn-ghost">Login</a><a
+                href="register.html" class="btn btn-primary">Register</a></div>
+        <div class="mobile-nav-actions hidden" id="mobile-user-info" style="flex-direction:column;gap:.5rem;"><span
+                class="user-name" style="font-weight:600;">User</span>
+            <div style="display:flex;gap:.75rem;"><a href="dashboard.html" class="btn btn-primary"
+                    style="flex:1;">Dashboard</a><button class="btn btn-ghost" data-action="logout"
+                    style="flex:1;">Logout</button></div>
+        </div>
+    </div>
+    <div class="overlay" id="nav-overlay"></div>
+
+    <header class="page-header" id="detail-header">
+        <div class="container page-header-inner">
+            <nav class="breadcrumb" id="detail-breadcrumb">
+                <a href="index.html">Home</a><span class="sep">/</span>
+                <a href="lost-items.html" id="bc-listing">Lost Items</a><span class="sep">/</span>
+                <span id="bc-item">Item Details</span>
+            </nav>
+            <h1 class="page-title" id="detail-page-title">Item Details</h1>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div id="detail-not-found" class="hidden" style="text-align:center;padding:5rem 1.5rem;">
+                <div style="font-size:4rem;margin-bottom:1.5rem;">🔍</div>
+                <h2 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:1rem;">Item Not Found</h2>
+                <p style="color:var(--text-muted);margin-bottom:2rem;">This item report could not be found. It may have
+                    been removed or the link is incorrect.</p>
+                <a href="lost-items.html" class="btn btn-primary">Browse Lost Items</a>
+            </div>
+
+            <div id="detail-content" class="hidden">
+                <div class="details-grid">
+                    <!-- LEFT: image + description -->
+                    <div>
+                        <div class="details-image-wrap" id="detail-image">
+                            <span id="detail-emoji" style="font-size:6rem;">📦</span>
+                        </div>
+
+                        <div style="margin-top:1.5rem;">
+                            <h2 class="section-title" style="font-size:1.2rem;margin-bottom:1rem;text-align:left;">
+                                Description</h2>
+                            <div class="details-desc" id="detail-desc">Loading...</div>
+                        </div>
+
+                        <div id="detail-additional-wrap" style="margin-top:1.25rem;display:none;">
+                            <h2 class="section-title" style="font-size:1.2rem;margin-bottom:1rem;text-align:left;">
+                                Additional Information</h2>
+                            <div class="details-desc" id="detail-additional" style="border-left-color:var(--warning);">
+                            </div>
+                        </div>
+
+                        <div style="margin-top:2rem;">
+                            <a href="#" id="btn-back" class="btn btn-ghost">← Back to Listings</a>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: info card -->
+                    <div>
+                        <div class="details-card">
+                            <h1 class="details-title" id="detail-title">Loading...</h1>
+                            <div class="details-status">
+                                <span class="badge" id="detail-status-badge">Loading</span>
+                                <span id="detail-time-ago" style="font-size:0.8rem;color:var(--text-muted);"></span>
+                            </div>
+
+                            <table class="details-table">
+                                <tr>
+                                    <td>Category</td>
+                                    <td id="detail-category">—</td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td id="detail-location">—</td>
+                                </tr>
+                                <tr>
+                                    <td>Date</td>
+                                    <td id="detail-date">—</td>
+                                </tr>
+                                <tr>
+                                    <td>Time</td>
+                                    <td id="detail-time">—</td>
+                                </tr>
+                            </table>
+
+                            <div class="details-poster">
+                                <div class="details-poster-avatar" id="detail-poster-avatar">?</div>
+                                <div class="details-poster-info">
+                                    <div class="name" id="detail-poster-name">Loading...</div>
+                                    <div class="date">Posted this report</div>
+                                </div>
+                            </div>
+
+                            <div class="details-actions">
+                                <button class="btn btn-primary btn-lg" id="btn-contact" onclick="showContactModal()">
+                                    📞 Contact Reporter
+                                </button>
+                                <a href="report-lost.html" class="btn btn-secondary" id="btn-report-another">
+                                    📝 Report Similar Item
+                                </a>
+                                <button class="btn btn-ghost" id="btn-save-detail">🤍 Save Item</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Contact Modal -->
+    <div class="modal-backdrop" id="contact-modal" role="dialog" aria-labelledby="modal-contact-title" aria-modal="true">
+        <div class="modal" style="max-width: 500px; text-align: left;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+                <div class="modal-icon" style="font-size:2rem; margin:0;">📞</div>
+                <h2 class="modal-title" id="modal-contact-title" style="margin:0; text-align:left; font-size:1.35rem;">Contact Reporter</h2>
+            </div>
+            
+            <div id="modal-contact-info" style="margin-bottom:1.5rem;">
+                Loading contact details...
+            </div>
+
+            <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; margin-bottom:1.5rem;">
+                <div style="font-size:0.8rem; font-weight:700; color:var(--dark); margin-bottom:0.25rem;">🛡️ Safe Handover Tips:</div>
+                <ul style="font-size:0.8rem; color:var(--text-muted); padding-left:1.25rem; list-style:disc; display:flex; flex-direction:column; gap:0.25rem;">
+                    <li>Always meet in a well-lit public campus location (e.g. Student Center, Library Reception).</li>
+                    <li>Ask the claimant to verify unique identifiers (lock screen, ID photo, engravings) before handing over.</li>
+                </ul>
+            </div>
+
+            <div class="modal-actions" style="justify-content: flex-end;">
+                <button class="btn btn-primary" onclick="closeModal('contact-modal')">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">🔍 Campus<span>Find</span></div>
+                    <p>The official university Lost & Found platform. Helping students and staff reconnect with their lost belongings on campus.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">f</a>
+                        <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="lost-items.html">Lost Items</a></li>
+                        <li><a href="found-items.html">Found Items</a></li>
+                        <li><a href="about.html">About CampusFind</a></li>
+                        <li><a href="contact.html">Contact & FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Reporting</h4>
+                    <ul>
+                        <li><a href="report-lost.html">Report Lost Item</a></li>
+                        <li><a href="report-found.html">Report Found Item</a></li>
+                        <li><a href="search.html">Search Database</a></li>
+                        <li><a href="dashboard.html">My Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>User Account</h4>
+                    <ul>
+                        <li><a href="login.html">Student / Staff Login</a></li>
+                        <li><a href="register.html">Create New Account</a></li>
+                        <li><a href="dashboard.html">Manage Reports</a></li>
+                        <li><a href="contact.html">Help & Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 CampusFind. All rights reserved. — University Internet Programming Project</p>
+                <div class="footer-bottom-links">
+                    <a href="about.html">Privacy Policy</a>
+                    <a href="about.html">Terms of Service</a>
+                    <a href="contact.html">Security Office</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        let currentItem = null;
+
+        function showContactModal() {
+            if (!currentItem) return;
+            const info = document.getElementById('modal-contact-info');
+            if (info) {
+                info.innerHTML = `
+                    <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; margin-bottom:0.75rem;">
+                        <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; margin-bottom:0.25rem;">Reported By</div>
+                        <div style="font-size:1.05rem; font-weight:700; color:var(--dark);">${currentItem.postedBy}</div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg); border-radius:var(--radius); border:1px solid var(--border);">
+                            <div style="display:flex; align-items:center; gap:0.5rem; overflow:hidden;">
+                                <span>📧</span>
+                                <a href="mailto:${currentItem.contactEmail}" style="color:var(--primary); font-weight:600; font-size:0.9rem; text-overflow:ellipsis; overflow:hidden;">${currentItem.contactEmail}</a>
+                            </div>
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="copyToClipboard('${currentItem.contactEmail}', 'Email')">📋 Copy</button>
+                        </div>
+                        ${currentItem.contactPhone ? `
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--bg); border-radius:var(--radius); border:1px solid var(--border);">
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <span>📱</span>
+                                <a href="tel:${currentItem.contactPhone}" style="color:var(--text); font-weight:600; font-size:0.9rem;">${currentItem.contactPhone}</a>
+                            </div>
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="copyToClipboard('${currentItem.contactPhone}', 'Phone number')">📋 Copy</button>
+                        </div>` : ''}
+                    </div>
+                `;
+            }
+            openModal('contact-modal');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const type = params.get('type') || 'lost';
+
+            const item = getItemById(id, type);
+
+            if (!item) {
+                document.getElementById('detail-not-found').classList.remove('hidden');
+                return;
+            }
+
+            currentItem = item;
+            const isLost = item.type === 'lost' || item.status === 'lost';
+
+            // Update breadcrumb
+            const bcListing = document.getElementById('bc-listing');
+            if (bcListing) { bcListing.textContent = isLost ? 'Lost Items' : 'Found Items'; bcListing.href = isLost ? 'lost-items.html' : 'found-items.html'; }
+            const bcItem = document.getElementById('bc-item');
+            if (bcItem) bcItem.textContent = item.name;
+
+            // Update page title
+            const pageTitle = document.getElementById('detail-page-title');
+            if (pageTitle) pageTitle.textContent = item.name;
+
+            document.title = `${item.name} — CampusFind`;
+
+            // Populate content
+            document.getElementById('detail-title').textContent = item.name;
+            document.getElementById('detail-desc').textContent = item.description;
+            document.getElementById('detail-emoji').textContent = ITEM_EMOJIS[item.category] || '📦';
+
+            const imgEl = document.getElementById('detail-image');
+            if (imgEl) imgEl.className = `details-image-wrap item-img-placeholder ${ITEM_IMG_CLASSES[item.category] || 'img-other'}`;
+
+            const badge = document.getElementById('detail-status-badge');
+            if (badge) { badge.textContent = isLost ? 'Lost' : 'Found'; badge.className = `badge ${isLost ? 'badge-lost' : 'badge-found'}`; }
+
+            document.getElementById('detail-time-ago').textContent = timeAgo(item.createdAt || item.date);
+            document.getElementById('detail-category').textContent = CATEGORIES.find(c => c.id === item.category)?.name || 'Other';
+            document.getElementById('detail-location').textContent = item.location;
+            document.getElementById('detail-date').textContent = formatDate(item.date);
+            document.getElementById('detail-time').textContent = item.time || 'Not specified';
+
+            const posterAvatar = document.getElementById('detail-poster-avatar');
+            if (posterAvatar) posterAvatar.textContent = item.postedBy.charAt(0).toUpperCase();
+            document.getElementById('detail-poster-name').textContent = item.postedBy;
+
+            if (item.additionalInfo) {
+                document.getElementById('detail-additional').textContent = item.additionalInfo;
+                document.getElementById('detail-additional-wrap').style.display = 'block';
+            }
+
+            const backBtn = document.getElementById('btn-back');
+            if (backBtn) backBtn.href = isLost ? 'lost-items.html' : 'found-items.html';
+
+            const reportAnotherBtn = document.getElementById('btn-report-another');
+            if (reportAnotherBtn) { reportAnotherBtn.href = isLost ? 'report-lost.html' : 'report-found.html'; reportAnotherBtn.textContent = isLost ? '📝 Report Similar Lost Item' : '📝 Report Similar Found Item'; }
+
+            // Save button
+            const saveBtn = document.getElementById('btn-save-detail');
+            if (saveBtn) {
+                const saved = getSavedItems().includes(item.id);
+                saveBtn.textContent = saved ? '❤️ Saved' : '🤍 Save Item';
+                saveBtn.addEventListener('click', () => {
+                    const s = getSavedItems();
+                    const idx = s.indexOf(item.id);
+                    if (idx === -1) { s.push(item.id); LS.set('saved_items', s); saveBtn.textContent = '❤️ Saved'; showToast('Saved', 'Item added to saved list.', 'success', 2500); }
+                    else { s.splice(idx, 1); LS.set('saved_items', s); saveBtn.textContent = '🤍 Save Item'; showToast('Removed', 'Item removed from saved list.', 'info', 2000); }
+                });
+            }
+
+            document.getElementById('detail-content').classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>

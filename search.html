@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search for lost and found items on campus.">
+    <title>Search Results — CampusFind</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation">
+        <div class="container navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <div class="logo-icon">🔍</div>
+                <div class="logo-text">Campus<span>Find</span></div>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lost-items.html">Lost Items</a></li>
+                <li><a href="found-items.html">Found Items</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <div id="nav-guest-btns"><a href="login.html" class="btn btn-ghost btn-sm">Login</a><a
+                        href="register.html" class="btn btn-primary btn-sm">Register</a></div>
+                <div id="nav-user-info" class="nav-user-info hidden"><a href="dashboard.html" class="nav-avatar">U</a><a
+                        href="dashboard.html" class="user-name"
+                        style="font-weight:600;color:var(--text);">User</a><button class="btn btn-ghost btn-sm"
+                        data-action="logout">Logout</button></div>
+            </div>
+            <button class="hamburger" id="hamburger"
+                aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div class="mobile-nav" id="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="lost-items.html">🔴 Lost Items</a></li>
+            <li><a href="found-items.html">🟢 Found Items</a></li>
+            <li><a href="about.html">ℹ️ About</a></li>
+            <li><a href="contact.html">📞 Contact</a></li>
+            <li><a href="dashboard.html">📊 Dashboard</a></li>
+        </ul>
+        <div class="mobile-nav-actions" id="mobile-guest-btns"><a href="login.html" class="btn btn-ghost">Login</a><a
+                href="register.html" class="btn btn-primary">Register</a></div>
+        <div class="mobile-nav-actions hidden" id="mobile-user-info" style="flex-direction:column;gap:.5rem;"><span
+                class="user-name" style="font-weight:600;">User</span>
+            <div style="display:flex;gap:.75rem;"><a href="dashboard.html" class="btn btn-primary"
+                    style="flex:1;">Dashboard</a><button class="btn btn-ghost" data-action="logout"
+                    style="flex:1;">Logout</button></div>
+        </div>
+    </div>
+    <div class="overlay" id="nav-overlay"></div>
+
+    <div class="search-hero">
+        <div class="container">
+            <h1 class="search-hero-title">Search Results for <span id="search-query-display"
+                    style="color:#60A5FA;"></span></h1>
+            <form id="search-form" role="search">
+                <div class="search-bar-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="search" id="main-search-input" placeholder="Search for an item..."
+                        aria-label="Search items">
+                    <button type="submit" class="btn btn-primary" style="margin:0.35rem;flex-shrink:0;">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main class="section" style="padding-top:1.5rem;">
+        <div class="container">
+            <div class="search-tabs" role="tablist">
+                <button class="search-tab active" data-tab="all" role="tab">All Items</button>
+                <button class="search-tab" data-tab="lost" role="tab">🔴 Lost</button>
+                <button class="search-tab" data-tab="found" role="tab">🟢 Found</button>
+            </div>
+            <div class="results-header">
+                <p class="results-count" id="results-count"></p>
+            </div>
+            <div class="items-grid" id="items-grid"></div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">🔍 Campus<span>Find</span></div>
+                    <p>The official university Lost & Found platform. Helping students and staff reconnect with their lost belongings on campus.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">f</a>
+                        <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="lost-items.html">Lost Items</a></li>
+                        <li><a href="found-items.html">Found Items</a></li>
+                        <li><a href="about.html">About CampusFind</a></li>
+                        <li><a href="contact.html">Contact & FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Reporting</h4>
+                    <ul>
+                        <li><a href="report-lost.html">Report Lost Item</a></li>
+                        <li><a href="report-found.html">Report Found Item</a></li>
+                        <li><a href="search.html">Search Database</a></li>
+                        <li><a href="dashboard.html">My Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>User Account</h4>
+                    <ul>
+                        <li><a href="login.html">Student / Staff Login</a></li>
+                        <li><a href="register.html">Create New Account</a></li>
+                        <li><a href="dashboard.html">Manage Reports</a></li>
+                        <li><a href="contact.html">Help & Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 CampusFind. All rights reserved. — University Internet Programming Project</p>
+                <div class="footer-bottom-links">
+                    <a href="about.html">Privacy Policy</a>
+                    <a href="about.html">Terms of Service</a>
+                    <a href="contact.html">Security Office</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/search.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', initSearchPage);</script>
+</body>
+
+</html>

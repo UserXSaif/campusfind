@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found — CampusFind University Lost & Found">
+  <title>404 Not Found — CampusFind</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo"><div class="logo-icon">🔍</div><div class="logo-text">Campus<span>Find</span></div></a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lost-items.html">Lost Items</a></li>
+      <li><a href="found-items.html">Found Items</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <div id="nav-guest-btns"><a href="login.html" class="btn btn-ghost btn-sm">Login</a><a href="register.html" class="btn btn-primary btn-sm">Register</a></div>
+      <div id="nav-user-info" class="nav-user-info hidden"><a href="dashboard.html" class="nav-avatar">U</a><a href="dashboard.html" class="user-name" style="font-weight:600;color:var(--text);">User</a><button class="btn btn-ghost btn-sm" data-action="logout">Logout</button></div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="lost-items.html">🔴 Lost Items</a></li>
+    <li><a href="found-items.html">🟢 Found Items</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+    <li><a href="dashboard.html">📊 Dashboard</a></li>
+  </ul>
+  <div class="mobile-nav-actions" id="mobile-guest-btns"><a href="login.html" class="btn btn-ghost">Login</a><a href="register.html" class="btn btn-primary">Register</a></div>
+  <div class="mobile-nav-actions hidden" id="mobile-user-info" style="flex-direction:column;gap:.5rem;"><span class="user-name" style="font-weight:600;">User</span><div style="display:flex;gap:.75rem;"><a href="dashboard.html" class="btn btn-primary" style="flex:1;">Dashboard</a><button class="btn btn-ghost" data-action="logout" style="flex:1;">Logout</button></div></div>
+</div>
+<div class="overlay" id="nav-overlay"></div>
+
+<!-- 404 CONTENT -->
+<main class="error-page" aria-label="Page not found">
+  <div style="max-width: 540px; margin: 0 auto;">
+    <div style="position:relative;display:inline-block;margin-bottom:1rem;">
+      <div class="error-code" aria-hidden="true">404</div>
+      <div class="error-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);">🔍</div>
+    </div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-desc">
+      Oops! The page you're looking for seems to be lost — just like some items on campus. But don't worry, we can help you find your way back.
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;">
+      <a href="index.html" class="btn btn-primary btn-lg">🏠 Go to Home</a>
+      <a href="lost-items.html" class="btn btn-secondary btn-lg">🔴 Lost Items</a>
+    </div>
+
+    <!-- Helpful links -->
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem;text-align:left;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:1.25rem;text-align:center;">You might be looking for...</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+        <a href="lost-items.html" style="display:flex;align-items:center;gap:0.75rem;padding:0.875rem 1rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);color:var(--text);font-size:0.875rem;font-weight:500;transition:var(--transition);" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          <span>🔴</span> Lost Items
+        </a>
+        <a href="found-items.html" style="display:flex;align-items:center;gap:0.75rem;padding:0.875rem 1rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);color:var(--text);font-size:0.875rem;font-weight:500;transition:var(--transition);" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          <span>🟢</span> Found Items
+        </a>
+        <a href="report-lost.html" style="display:flex;align-items:center;gap:0.75rem;padding:0.875rem 1rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);color:var(--text);font-size:0.875rem;font-weight:500;transition:var(--transition);" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          <span>📝</span> Report Lost
+        </a>
+        <a href="contact.html" style="display:flex;align-items:center;gap:0.75rem;padding:0.875rem 1rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);color:var(--text);font-size:0.875rem;font-weight:500;transition:var(--transition);" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          <span>📞</span> Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">🔍 Campus<span>Find</span></div>
+        <p>The official university Lost & Found platform. Helping students and staff reconnect with their lost belongings on campus.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lost-items.html">Lost Items</a></li>
+          <li><a href="found-items.html">Found Items</a></li>
+          <li><a href="about.html">About CampusFind</a></li>
+          <li><a href="contact.html">Contact & FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Reporting</h4>
+        <ul>
+          <li><a href="report-lost.html">Report Lost Item</a></li>
+          <li><a href="report-found.html">Report Found Item</a></li>
+          <li><a href="search.html">Search Database</a></li>
+          <li><a href="dashboard.html">My Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>User Account</h4>
+        <ul>
+          <li><a href="login.html">Student / Staff Login</a></li>
+          <li><a href="register.html">Create New Account</a></li>
+          <li><a href="dashboard.html">Manage Reports</a></li>
+          <li><a href="contact.html">Help & Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CampusFind. All rights reserved. — University Internet Programming Project</p>
+      <div class="footer-bottom-links">
+        <a href="about.html">Privacy Policy</a>
+        <a href="about.html">Terms of Service</a>
+        <a href="contact.html">Security Office</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

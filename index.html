@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CampusFind — The official university Lost & Found platform. Report lost items, browse found items, and recover your belongings on campus.">
+  <title>CampusFind — University Lost & Found</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo" aria-label="CampusFind home">
+      <div class="logo-icon">🔍</div>
+      <div class="logo-text">Campus<span>Find</span></div>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lost-items.html">Lost Items</a></li>
+      <li><a href="found-items.html">Found Items</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <div id="nav-guest-btns">
+        <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+      <div id="nav-user-info" class="nav-user-info hidden">
+        <a href="dashboard.html" class="nav-avatar" title="Dashboard">U</a>
+        <a href="dashboard.html" class="user-name" style="font-weight:600; color:var(--text);">User</a>
+        <button class="btn btn-ghost btn-sm" data-action="logout">Logout</button>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE NAV ── -->
+<div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="lost-items.html">🔴 Lost Items</a></li>
+    <li><a href="found-items.html">🟢 Found Items</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+    <li><a href="dashboard.html">📊 Dashboard</a></li>
+  </ul>
+  <div class="mobile-nav-actions" id="mobile-guest-btns">
+    <a href="login.html" class="btn btn-ghost">Login</a>
+    <a href="register.html" class="btn btn-primary">Register</a>
+  </div>
+  <div class="mobile-nav-actions hidden" id="mobile-user-info" style="flex-direction:column; gap:0.5rem;">
+    <span class="user-name" style="font-weight:600; color:var(--text);">User</span>
+    <div style="display:flex;gap:0.75rem;">
+      <a href="dashboard.html" class="btn btn-primary" style="flex:1;">Dashboard</a>
+      <button class="btn btn-ghost" data-action="logout" style="flex:1;">Logout</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="nav-overlay"></div>
+
+<!-- ── HERO ── -->
+<section class="hero" aria-label="Hero section">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          University Lost & Found System
+        </div>
+        <h1 class="hero-title">
+          Lost Something<br>on <span class="highlight">Campus?</span>
+        </h1>
+        <p class="hero-desc">
+          CampusFind helps university students and staff quickly report lost belongings, browse found items, and recover what matters — all in one centralized platform.
+        </p>
+        <div class="hero-actions">
+          <a href="report-lost.html" class="btn btn-primary btn-lg">📝 Report Lost Item</a>
+          <a href="found-items.html" class="btn btn-outline btn-lg">🟢 Browse Found Items</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-illustration">
+          <div class="hero-cards-preview">
+            <div class="preview-card">
+              <div class="preview-card-icon lost">📱</div>
+              <div class="preview-card-info">
+                <div class="label">Lost Item</div>
+                <div class="value">Samsung Galaxy S23</div>
+              </div>
+              <span class="preview-card-badge lost">Lost</span>
+            </div>
+            <div class="preview-card">
+              <div class="preview-card-icon found">👛</div>
+              <div class="preview-card-info">
+                <div class="label">Found Item</div>
+                <div class="value">Brown Leather Wallet</div>
+              </div>
+              <span class="preview-card-badge found">Found</span>
+            </div>
+            <div class="preview-card">
+              <div class="preview-card-icon resolved">🪪</div>
+              <div class="preview-card-info">
+                <div class="label">Resolved</div>
+                <div class="value">Student ID Card</div>
+              </div>
+              <span class="preview-card-badge resolved">Returned ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEARCH ── -->
+<section class="search-section" aria-label="Search items">
+  <div class="container">
+    <form id="home-search-form" role="search">
+      <div class="search-bar-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="home-search-input" placeholder="Search for a lost or found item... (e.g. wallet, phone, keys)" aria-label="Search items">
+        <button type="submit" class="btn btn-primary" style="margin: 0.35rem; flex-shrink:0;">Search</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<section class="stats-section" aria-label="Statistics">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-count="250" data-suffix="+">0+</div>
+        <div class="stat-label">Items Reported</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="120" data-suffix="+">0+</div>
+        <div class="stat-label">Items Found</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="85" data-suffix="+">0+</div>
+        <div class="stat-label">Items Returned</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="1500" data-suffix="+">0+</div>
+        <div class="stat-label">Students Using Platform</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<section class="section bg-white" aria-label="Browse by category">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Browse by Category</span>
+      <h2 class="section-title">What did you lose?</h2>
+      <p class="section-desc">Select a category to quickly find relevant lost and found reports.</p>
+    </div>
+    <div class="categories-grid" id="categories-grid"></div>
+  </div>
+</section>
+
+<!-- ── RECENT LOST ITEMS ── -->
+<section class="section" aria-label="Recent lost items">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Recent Reports</span>
+      <h2 class="section-title">Recently Lost Items</h2>
+      <p class="section-desc">Help reunite these items with their owners.</p>
+    </div>
+    <div class="items-grid" id="recent-lost-grid"></div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="lost-items.html" class="btn btn-secondary btn-lg">View All Lost Items →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── RECENT FOUND ITEMS ── -->
+<section class="section bg-white" aria-label="Recent found items">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Good Samaritans</span>
+      <h2 class="section-title">Recently Found Items</h2>
+      <p class="section-desc">Items waiting to be claimed by their rightful owners.</p>
+    </div>
+    <div class="items-grid" id="recent-found-grid"></div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="found-items.html" class="btn btn-secondary btn-lg">View All Found Items →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section how-bg" aria-label="How it works">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label" style="color:#60A5FA;">Simple Process</span>
+      <h2 class="section-title" style="color:var(--white);">How CampusFind Works</h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.65);">Four simple steps to recover your lost belongings.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon">📝</div>
+        <h3 class="step-title">Report an Item</h3>
+        <p class="step-desc">Submit a detailed report of your lost item or an item you found on campus. Include photos and location details.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon">🔍</div>
+        <h3 class="step-title">Search Listings</h3>
+        <p class="step-desc">Browse through found items or search by category, location, or description to find your belonging.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon">📞</div>
+        <h3 class="step-title">Contact the User</h3>
+        <p class="step-desc">Once you find a match, contact the person who reported the item directly through the platform.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-icon">🎉</div>
+        <h3 class="step-title">Recover Your Item</h3>
+        <p class="step-desc">Arrange a meeting at a safe campus location, verify ownership, and recover your belonging.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" aria-label="Call to action">
+  <div class="container">
+    <h2 class="cta-title">Ready to Find Your Lost Item?</h2>
+    <p class="cta-desc">Join thousands of university students and staff using CampusFind to recover their belongings.</p>
+    <div class="cta-actions">
+      <a href="report-lost.html" class="btn btn-outline btn-lg">📝 Report Lost Item</a>
+      <a href="report-found.html" class="btn btn-secondary btn-lg">🟢 Report Found Item</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">🔍 Campus<span>Find</span></div>
+        <p>The official university Lost & Found platform. Helping students and staff reconnect with their lost belongings since 2026.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lost-items.html">Lost Items</a></li>
+          <li><a href="found-items.html">Found Items</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Report</h4>
+        <ul>
+          <li><a href="report-lost.html">Report Lost Item</a></li>
+          <li><a href="report-found.html">Report Found Item</a></li>
+          <li><a href="search.html">Search Items</a></li>
+          <li><a href="dashboard.html">My Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="contact.html">Get Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CampusFind. All rights reserved. — University Internet Programming Project</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

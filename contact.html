@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact CampusFind for support, questions, or feedback about the university Lost & Found platform.">
+  <title>Contact — CampusFind</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo"><div class="logo-icon">🔍</div><div class="logo-text">Campus<span>Find</span></div></a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lost-items.html">Lost Items</a></li>
+      <li><a href="found-items.html">Found Items</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <div id="nav-guest-btns"><a href="login.html" class="btn btn-ghost btn-sm">Login</a><a href="register.html" class="btn btn-primary btn-sm">Register</a></div>
+      <div id="nav-user-info" class="nav-user-info hidden"><a href="dashboard.html" class="nav-avatar">U</a><a href="dashboard.html" class="user-name" style="font-weight:600;color:var(--text);">User</a><button class="btn btn-ghost btn-sm" data-action="logout">Logout</button></div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="lost-items.html">🔴 Lost Items</a></li>
+    <li><a href="found-items.html">🟢 Found Items</a></li>
+    <li><a href="about.html">ℹ️ About</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+    <li><a href="dashboard.html">📊 Dashboard</a></li>
+  </ul>
+  <div class="mobile-nav-actions" id="mobile-guest-btns"><a href="login.html" class="btn btn-ghost">Login</a><a href="register.html" class="btn btn-primary">Register</a></div>
+  <div class="mobile-nav-actions hidden" id="mobile-user-info" style="flex-direction:column;gap:.5rem;"><span class="user-name" style="font-weight:600;">User</span><div style="display:flex;gap:.75rem;"><a href="dashboard.html" class="btn btn-primary" style="flex:1;">Dashboard</a><button class="btn btn-ghost" data-action="logout" style="flex:1;">Logout</button></div></div>
+</div>
+<div class="overlay" id="nav-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header" style="background:linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%);">
+  <div class="container page-header-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span>Contact</span></nav>
+    <h1 class="page-title">📞 Contact Us</h1>
+    <p class="page-subtitle">Have a question, suggestion, or need help? We're here for you.</p>
+  </div>
+</header>
+
+<!-- MAIN CONTACT SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: Contact Form -->
+      <div>
+        <div class="form-container" style="box-shadow:none;border:none;background:transparent;">
+          <div style="margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:0.5rem;">Send Us a Message</h2>
+            <p style="color:var(--text-muted);">Fill in the form below and we'll get back to you within 24 hours on working days.</p>
+          </div>
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Your Name <span style="color:var(--danger);">*</span></label>
+                <input type="text" id="contact-name" class="form-input" placeholder="Full name" required>
+                <span class="form-error"></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address <span style="color:var(--danger);">*</span></label>
+                <input type="email" id="contact-email" class="form-input" placeholder="your@email.com" required>
+                <span class="form-error"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-subject">Subject <span style="color:var(--danger);">*</span></label>
+              <select id="contact-subject" class="form-select" required>
+                <option value="">Select a topic...</option>
+                <option value="lost-item">Lost Item Help</option>
+                <option value="found-item">Found Item Help</option>
+                <option value="account">Account Issue</option>
+                <option value="report-problem">Report a Problem</option>
+                <option value="suggestion">Suggestion / Feedback</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="form-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Message <span style="color:var(--danger);">*</span></label>
+              <textarea id="contact-message" class="form-textarea" rows="6" placeholder="Describe your question or issue in detail..." required></textarea>
+              <span class="form-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message 📨</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: Contact Info + FAQ -->
+      <div>
+        <div class="contact-info-card">
+          <h3>📍 Contact Information</h3>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🏛️</div>
+            <div class="contact-info-text">
+              <div class="label">University Address</div>
+              <div class="value">Main Campus Building, University Road<br>Dhaka 1207, Bangladesh</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div class="contact-info-text">
+              <div class="label">Email</div>
+              <div class="value"><a href="mailto:lostfound@uni.edu" style="color:var(--primary);">lostfound@uni.edu</a></div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📱</div>
+            <div class="contact-info-text">
+              <div class="label">Phone</div>
+              <div class="value">+880-2-9XXX-XXXX (ext. 234)</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🕐</div>
+            <div class="contact-info-text">
+              <div class="label">Office Hours</div>
+              <div class="value">Sunday – Thursday<br>9:00 AM – 5:00 PM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="contact-info-card">
+          <h3>⚡ Quick Actions</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <a href="report-lost.html" class="btn btn-primary" style="width:100%;">📝 Report a Lost Item</a>
+            <a href="report-found.html" class="btn btn-success" style="width:100%;">🟢 Report a Found Item</a>
+            <a href="search.html" class="btn btn-ghost" style="width:100%;">🔍 Search All Items</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="section bg-white" aria-label="Frequently asked questions">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-desc">Quick answers to the most common questions about CampusFind.</p>
+    </div>
+    <div style="max-width:780px;margin:0 auto;">
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          How do I report a lost item?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Click on "Report Lost Item" in the navigation menu or on the homepage. Fill in the form with as much detail as possible — including item name, category, location, date lost, and a description. Submit the form and your report will be visible to all users immediately.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          I found an item on campus. What should I do?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Great job being a good Samaritan! Go to "Report Found Item", fill in the details about where and when you found it, upload a photo if possible, and submit. The item will appear in the Found Items listing so the owner can contact you. You can also hand it in to your campus security office or administration building.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          Is CampusFind free to use?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes, CampusFind is completely free for all university students, teaching staff, and administrative staff. There are no fees, subscriptions, or premium plans. The platform is a university service.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          How do I contact the person who found my item?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Open the item listing and click "View Details". On the detail page, click "Contact Reporter" to see the contact information of the person who submitted the found item report. Please be respectful and verify your ownership of the item before claiming it.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          What happens after I recover my item?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Once you've recovered your item, please log into your dashboard and delete or mark your report as resolved. This helps keep the listings clean and lets others know the item has been returned. Thank you for keeping CampusFind up to date!</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          My item is not showing up in search results. Why?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Try broadening your search terms or clearing your filters. Search by a single keyword like "wallet" or "phone" rather than a long phrase. Also check both the Lost Items and Found Items sections. If you still can't find it, submit a lost item report so others can notify you if they find it.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          Can I use CampusFind without an account?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You can browse lost and found items without an account. However, to submit a report, contact a reporter, or use the dashboard, you need to create a free account with your university email and student ID.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button">
+          How is my personal information protected?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">CampusFind is a frontend prototype that currently stores data locally in your browser. Your contact information is only visible to people who view the item details page. In the full production version, all data will be encrypted, stored securely, and never sold or shared with third parties.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">🔍 Campus<span>Find</span></div>
+        <p>The official university Lost & Found platform. Helping students and staff reconnect with their lost belongings on campus.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lost-items.html">Lost Items</a></li>
+          <li><a href="found-items.html">Found Items</a></li>
+          <li><a href="about.html">About CampusFind</a></li>
+          <li><a href="contact.html">Contact & FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Reporting</h4>
+        <ul>
+          <li><a href="report-lost.html">Report Lost Item</a></li>
+          <li><a href="report-found.html">Report Found Item</a></li>
+          <li><a href="search.html">Search Database</a></li>
+          <li><a href="dashboard.html">My Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>User Account</h4>
+        <ul>
+          <li><a href="login.html">Student / Staff Login</a></li>
+          <li><a href="register.html">Create New Account</a></li>
+          <li><a href="dashboard.html">Manage Reports</a></li>
+          <li><a href="contact.html">Help & Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CampusFind. All rights reserved. — University Internet Programming Project</p>
+      <div class="footer-bottom-links">
+        <a href="about.html">Privacy Policy</a>
+        <a href="about.html">Terms of Service</a>
+        <a href="contact.html">Security Office</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>
