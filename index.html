@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <script>
+    (function(){try{const t=localStorage.getItem('campusfind_theme')||'light';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();
+  </script>
 </head>
 <body>
 
@@ -26,9 +29,13 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="navbar-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
       <div id="nav-guest-btns">
-        <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+        <a href="login.html" class="btn btn-ghost btn-sm" data-open-modal="login-modal">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm" data-open-modal="register-modal">Register</a>
       </div>
       <div id="nav-user-info" class="nav-user-info hidden">
         <a href="dashboard.html" class="nav-avatar" title="Dashboard">U</a>
@@ -53,8 +60,8 @@
     <li><a href="dashboard.html">📊 Dashboard</a></li>
   </ul>
   <div class="mobile-nav-actions" id="mobile-guest-btns">
-    <a href="login.html" class="btn btn-ghost">Login</a>
-    <a href="register.html" class="btn btn-primary">Register</a>
+    <a href="login.html" class="btn btn-ghost" data-open-modal="login-modal">Login</a>
+    <a href="register.html" class="btn btn-primary" data-open-modal="register-modal">Register</a>
   </div>
   <div class="mobile-nav-actions hidden" id="mobile-user-info" style="flex-direction:column; gap:0.5rem;">
     <span class="user-name" style="font-weight:600; color:var(--text);">User</span>
@@ -284,8 +291,8 @@
       <div class="footer-col">
         <h4>Account</h4>
         <ul>
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
+          <li><a href="login.html" data-open-modal="login-modal">Login</a></li>
+          <li><a href="register.html" data-open-modal="register-modal">Register</a></li>
           <li><a href="dashboard.html">Dashboard</a></li>
           <li><a href="contact.html">Get Help</a></li>
         </ul>
@@ -301,7 +308,116 @@
   </div>
 </footer>
 
+<!-- ── LOGIN MODAL ── -->
+<div class="modal-backdrop" id="login-modal" role="dialog" aria-labelledby="modal-login-title" aria-modal="true" aria-hidden="true">
+  <div class="modal modal-auth">
+    <button class="modal-close-btn" aria-label="Close login dialog" onclick="closeModal('login-modal')">✕</button>
+    <div class="auth-logo">
+      <div class="logo-icon" style="width:48px;height:48px;background:var(--primary);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 0.5rem;color:var(--white);">🔍</div>
+      <div class="brand" style="font-size:1.35rem;font-weight:800;color:var(--dark);">Campus<span style="color:var(--primary);">Find</span></div>
+    </div>
+    <h2 class="auth-title" id="modal-login-title">Welcome Back</h2>
+    <p class="auth-subtitle">Sign in to manage your reports and track lost items.</p>
+
+    <form id="modal-login-form" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="modal-login-email">Email Address <span style="color:var(--danger);">*</span></label>
+        <input type="email" id="modal-login-email" class="form-input" placeholder="your@student.uni.edu" autocomplete="email" required>
+        <span class="form-error"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-login-password">Password <span style="color:var(--danger);">*</span></label>
+        <div class="password-wrap">
+          <input type="password" id="modal-login-password" class="form-input" placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+        </div>
+        <span class="form-error"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <label class="form-check">
+          <input type="checkbox" id="modal-remember-me">
+          <label for="modal-remember-me">Remember me</label>
+        </label>
+        <a href="#" style="font-size:0.875rem;color:var(--primary);">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Login to CampusFind</button>
+    </form>
+
+    <div class="auth-divider"><span>or</span></div>
+    <button id="btn-modal-demo-login" type="button" class="btn btn-ghost" style="width:100%;">🎓 Continue with Demo Account</button>
+
+    <div class="auth-footer" style="margin-top:1.25rem;">
+      Don't have an account? <a href="#" data-switch-to="register-modal" id="switch-to-register">Create Account</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── REGISTER MODAL ── -->
+<div class="modal-backdrop" id="register-modal" role="dialog" aria-labelledby="modal-register-title" aria-modal="true" aria-hidden="true">
+  <div class="modal modal-auth modal-register">
+    <button class="modal-close-btn" aria-label="Close register dialog" onclick="closeModal('register-modal')">✕</button>
+    <div class="auth-logo">
+      <div class="logo-icon" style="width:48px;height:48px;background:var(--primary);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 0.5rem;color:var(--white);">🔍</div>
+      <div class="brand" style="font-size:1.35rem;font-weight:800;color:var(--dark);">Campus<span style="color:var(--primary);">Find</span></div>
+    </div>
+    <h2 class="auth-title" id="modal-register-title">Create Account</h2>
+    <p class="auth-subtitle">Join CampusFind to report and recover lost items on campus.</p>
+
+    <form id="modal-register-form" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="modal-reg-name">Full Name <span style="color:var(--danger);">*</span></label>
+        <input type="text" id="modal-reg-name" class="form-input" placeholder="e.g. Ahmed Hassan" autocomplete="name" required>
+        <span class="form-error"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-reg-studentid">Student ID <span style="color:var(--danger);">*</span></label>
+        <input type="text" id="modal-reg-studentid" class="form-input" placeholder="e.g. CSE-2022-045 or STD-12345" required>
+        <span class="form-hint">Enter your university-issued student ID number.</span>
+        <span class="form-error"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-reg-email">University Email <span style="color:var(--danger);">*</span></label>
+        <input type="email" id="modal-reg-email" class="form-input" placeholder="your@student.uni.edu" autocomplete="email" required>
+        <span class="form-error"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-reg-password">Password <span style="color:var(--danger);">*</span></label>
+        <div class="password-wrap">
+          <input type="password" id="modal-reg-password" class="form-input" placeholder="At least 8 characters" autocomplete="new-password" required>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+        </div>
+        <div style="margin-top:0.5rem;">
+          <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
+            <div id="modal-password-strength" style="height:100%;width:0;transition:all 0.3s;border-radius:2px;"></div>
+          </div>
+          <span id="modal-strength-hint" style="font-size:0.75rem;color:var(--text-muted);"></span>
+        </div>
+        <span class="form-error"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="modal-reg-confirm">Confirm Password <span style="color:var(--danger);">*</span></label>
+        <div class="password-wrap">
+          <input type="password" id="modal-reg-confirm" class="form-input" placeholder="Re-enter your password" autocomplete="new-password" required>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+        </div>
+        <span class="form-error"></span>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <label class="form-check">
+          <input type="checkbox" id="modal-agree-terms" checked>
+          <label for="modal-agree-terms">I agree to the <a href="#" style="color:var(--primary);">Terms of Use</a> and <a href="#" style="color:var(--primary);">Privacy Policy</a></label>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Create My Account</button>
+    </form>
+    <div class="auth-footer" style="margin-top:1.25rem;">
+      Already have an account? <a href="#" data-switch-to="login-modal" id="switch-to-login">Sign In</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script src="js/forms.js"></script>
 </body>
 </html>

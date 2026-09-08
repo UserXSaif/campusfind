@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script>
+        (function(){try{const t=localStorage.getItem('campusfind_theme')||'light';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();
+    </script>
 </head>
 
 <body>
@@ -27,6 +30,10 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="navbar-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+                    <span class="icon-moon" aria-hidden="true">🌙</span>
+                    <span class="icon-sun" aria-hidden="true">☀️</span>
+                </button>
                 <div id="nav-guest-btns"><a href="login.html" class="btn btn-ghost btn-sm">Login</a><a
                         href="register.html" class="btn btn-primary btn-sm">Register</a></div>
                 <div id="nav-user-info" class="nav-user-info hidden"><a href="dashboard.html" class="nav-avatar">U</a><a

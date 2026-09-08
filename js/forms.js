@@ -358,6 +358,170 @@ function initPasswordStrength() {
     });
 }
 
+/* ── Home Page Auth Modals ─────────────────────────────────── */
+function initAuthModals() {
+    const loginForm = document.getElementById('modal-login-form');
+    const registerForm = document.getElementById('modal-register-form');
+
+    // Modal switching links
+    document.addEventListener('click', (e) => {
+        const switchBtn = e.target.closest('[data-switch-to]');
+        if (switchBtn) {
+            e.preventDefault();
+            const targetId = switchBtn.getAttribute('data-switch-to');
+            const currentModal = switchBtn.closest('.modal-backdrop');
+            if (currentModal) {
+                closeModal(currentModal.id);
+            }
+            setTimeout(() => {
+                openModal(targetId);
+            }, 150);
+        }
+    });
+
+    // Modal Login
+    if (loginForm) {
+        const rules = {
+            'modal-login-email': { required: true, email: true },
+            'modal-login-password': { required: true, minLen: 6 }
+        };
+
+        Object.keys(rules).forEach(id => {
+            const el = loginForm.querySelector(`#${id}`);
+            if (el) {
+                el.addEventListener('blur', () => validateField(el, rules[id]));
+                el.addEventListener('input', () => {
+                    if (el.classList.contains('error')) validateField(el, rules[id]);
+                });
+            }
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!validateForm(loginForm, rules)) {
+                showToast('Login Failed', 'Please enter a valid email and password.', 'error');
+                return;
+            }
+
+            const email = loginForm.querySelector('#modal-login-email')?.value.trim();
+            const user = {
+                name: email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+                email,
+                studentId: 'STD-' + Math.floor(10000 + Math.random() * 90000),
+                joinedAt: new Date().toISOString()
+            };
+
+            setCurrentUser(user);
+            closeModal('login-modal');
+            updateNavAuth();
+            showToast('Welcome Back!', `Logged in as ${user.name}`, 'success', 3500);
+            loginForm.reset();
+        });
+
+        // Modal Demo Login
+        const demoBtn = document.getElementById('btn-modal-demo-login');
+        if (demoBtn) {
+            demoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const demoUser = {
+                    name: 'Demo Student',
+                    email: 'demo@student.uni.edu',
+                    studentId: 'STD-20220001',
+                    joinedAt: new Date().toISOString()
+                };
+                setCurrentUser(demoUser);
+                closeModal('login-modal');
+                updateNavAuth();
+                showToast('Demo Login', 'Logged in as Demo Student.', 'info', 3500);
+            });
+        }
+    }
+
+    // Modal Register
+    if (registerForm) {
+        const rules = {
+            'modal-reg-name': { required: true, minLen: 2 },
+            'modal-reg-studentid': { required: true, minLen: 4 },
+            'modal-reg-email': { required: true, email: true },
+            'modal-reg-password': { required: true, minLen: 8 },
+            'modal-reg-confirm': { required: true }
+        };
+
+        Object.keys(rules).forEach(id => {
+            const el = registerForm.querySelector(`#${id}`);
+            if (el) {
+                el.addEventListener('blur', () => {
+                    if (id === 'modal-reg-confirm') {
+                        validateField(el, { required: true, match: registerForm.querySelector('#modal-reg-password')?.value });
+                    } else {
+                        validateField(el, rules[id]);
+                    }
+                });
+                el.addEventListener('input', () => {
+                    if (el.classList.contains('error')) {
+                        if (id === 'modal-reg-confirm') {
+                            validateField(el, { required: true, match: registerForm.querySelector('#modal-reg-password')?.value });
+                        } else {
+                            validateField(el, rules[id]);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Modal Password strength indicator
+        const passInput = registerForm.querySelector('#modal-reg-password');
+        const strengthBar = registerForm.querySelector('#modal-password-strength');
+        const hint = registerForm.querySelector('#modal-strength-hint');
+        if (passInput && strengthBar) {
+            passInput.addEventListener('input', () => {
+                const val = passInput.value;
+                let score = 0;
+                if (val.length >= 8) score++;
+                if (/[A-Z]/.test(val)) score++;
+                if (/[0-9]/.test(val)) score++;
+                if (/[^a-zA-Z0-9]/.test(val)) score++;
+
+                const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+                const colors = ['', '#DC2626', '#F59E0B', '#2563EB', '#16A34A'];
+                strengthBar.style.width = `${score * 25}%`;
+                strengthBar.style.background = colors[score] || 'var(--border)';
+                if (hint) hint.textContent = labels[score] || '';
+            });
+        }
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let valid = validateForm(registerForm, rules);
+
+            const passEl = registerForm.querySelector('#modal-reg-password');
+            const confirmEl = registerForm.querySelector('#modal-reg-confirm');
+            if (confirmEl && passEl && confirmEl.value !== passEl.value) {
+                validateField(confirmEl, { required: true, match: passEl.value });
+                valid = false;
+            }
+
+            if (!valid) {
+                showToast('Validation Error', 'Please check the form and fix the highlighted fields.', 'error');
+                return;
+            }
+
+            const user = {
+                name: registerForm.querySelector('#modal-reg-name')?.value.trim(),
+                studentId: registerForm.querySelector('#modal-reg-studentid')?.value.trim(),
+                email: registerForm.querySelector('#modal-reg-email')?.value.trim(),
+                joinedAt: new Date().toISOString()
+            };
+
+            setCurrentUser(user);
+            closeModal('register-modal');
+            updateNavAuth();
+            showToast('Account Created!', `Welcome to CampusFind, ${user.name}!`, 'success', 3500);
+            registerForm.reset();
+        });
+    }
+}
+
 /* ── DOMContentLoaded ──────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
     initReportForm('report-lost-form', 'lost');
@@ -367,4 +531,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initLoginForm();
     initRegisterForm();
     initPasswordStrength();
+    initAuthModals();
 });

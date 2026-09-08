@@ -30,28 +30,103 @@ function showToast(title, message, type = 'info', duration = 4000) {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, duration);
 }
 
+/* ── Theme Management ──────────────────────────────────────── */
+function getStoredTheme() {
+    try {
+        return localStorage.getItem('campusfind_theme') || 'light';
+    } catch {
+        return 'light';
+    }
+}
+
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+    }
+    try {
+        localStorage.setItem('campusfind_theme', theme);
+    } catch {}
+
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        const isDark = theme === 'dark';
+        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        btn.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        btn.innerHTML = isDark
+            ? '<span class="icon-sun" aria-hidden="true">☀️</span>'
+            : '<span class="icon-moon" aria-hidden="true">🌙</span>';
+    });
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+}
+
+function initTheme() {
+    applyTheme(getStoredTheme());
+    document.addEventListener('click', (e) => {
+        const toggleBtn = e.target.closest('.theme-toggle');
+        if (toggleBtn) {
+            e.preventDefault();
+            toggleTheme();
+        }
+    });
+}
+
+// Early theme check as soon as app.js runs
+applyTheme(getStoredTheme());
+
 /* ── Modal System ──────────────────────────────────────────── */
+let lastFocusedElement = null;
+
 function openModal(id) {
     const modal = document.getElementById(id);
-    if (modal) { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    if (!modal) return;
+    lastFocusedElement = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Focus first interactive input/button inside modal for a11y
+    const focusTarget = modal.querySelector('input:not([type="hidden"]), select, textarea, button:not(.modal-close-btn)');
+    if (focusTarget) {
+        setTimeout(() => focusTarget.focus(), 60);
+    }
 }
 
 function closeModal(id) {
     const modal = document.getElementById(id);
-    if (modal) { modal.classList.remove('open'); document.body.style.overflow = ''; }
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    
+    // Only restore body scrolling if no other modals are open
+    if (!document.querySelector('.modal-backdrop.open')) {
+        document.body.style.overflow = '';
+    }
+
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+    }
 }
 
 // Close modal on backdrop click or Escape key
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal-backdrop')) {
-        e.target.classList.remove('open');
-        document.body.style.overflow = '';
+        closeModal(e.target.id);
     }
 });
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+        const openModals = document.querySelectorAll('.modal-backdrop.open');
+        if (openModals.length > 0) {
+            openModals.forEach(m => closeModal(m.id));
+        }
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobile-nav');
         const overlay = document.getElementById('nav-overlay');
@@ -61,10 +136,45 @@ document.addEventListener('keydown', (e) => {
             hamburger?.setAttribute('aria-expanded', 'false');
             mobileNav.setAttribute('aria-hidden', 'true');
             overlay?.classList.remove('visible');
+            document.body.style.overflow = '';
         }
-        document.body.style.overflow = '';
     }
 });
+
+// Setup modal trigger handling (e.g. data-open-modal or login/register links on index.html)
+function initModalTriggers() {
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-open-modal]');
+        if (trigger) {
+            const modalId = trigger.getAttribute('data-open-modal');
+            const targetModal = document.getElementById(modalId);
+            if (targetModal) {
+                e.preventDefault();
+                // If mobile nav is open, close it
+                const mobileNav = document.getElementById('mobile-nav');
+                const hamburger = document.getElementById('hamburger');
+                const overlay = document.getElementById('nav-overlay');
+                if (mobileNav && mobileNav.classList.contains('open')) {
+                    mobileNav.classList.remove('open');
+                    hamburger?.classList.remove('open');
+                    hamburger?.setAttribute('aria-expanded', 'false');
+                    mobileNav.setAttribute('aria-hidden', 'true');
+                    overlay?.classList.remove('visible');
+                }
+                openModal(modalId);
+            }
+        }
+    });
+
+    // Check URL parameters on page load to see if modal requested (e.g. ?modal=login)
+    const urlParams = new URLSearchParams(window.location.search);
+    const modalParam = urlParams.get('modal');
+    if (modalParam === 'login' && document.getElementById('login-modal')) {
+        setTimeout(() => openModal('login-modal'), 100);
+    } else if (modalParam === 'register' && document.getElementById('register-modal')) {
+        setTimeout(() => openModal('register-modal'), 100);
+    }
+}
 
 /* ── Copy to Clipboard Helper ──────────────────────────────── */
 function copyToClipboard(text, label = 'Text') {
@@ -334,7 +444,9 @@ function initCounters() {
 
 /* ── Init ──────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initHamburger();
+    initModalTriggers();
     setActiveNavLink();
     updateNavAuth();
     renderCategories();
